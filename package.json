@@ -1,0 +1,26 @@
+{
+  "name": "music-bot",
+  "version": "1.0.0",
+  "description": "A modern, interactive Discord Music Bot using Node.js, Discord.js v14, and lavalink-client",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [
+    "discord",
+    "music",
+    "bot",
+    "lavalink",
+    "discord.js"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "lavalink-client": "^2.5.7"
+  }
+}
